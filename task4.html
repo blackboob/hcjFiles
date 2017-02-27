@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta  charset="utf-8" />
+<title>task four</title>
+<style>
+/*灰色盒子*/
+	#box{
+		width:400px;height:200px;
+		position:absolute;
+		left:50%;
+		top:50%;
+		margin:-100px 0 0 -200px;
+		background:#ccc;
+		overflow:hidden;	
+		}
+	#box div{
+		width:100px;height:100px;background:#fc0;
+		border-radius:50%;	
+		}
+   /*左边圆*/ 
+	#left{		 	
+		margin:-50px 0 0 -50px;
+		}
+   /*右边圆*/ 
+	#right{
+		position:absolute;
+		right:-50px;bottom:-50px;	
+		}			
+</style>
+</head>
+
+<body>
+
+<div id="box">
+	<div id="left"></div>
+  <div id="right"></div>
+</div>
+</body>
+</html>
