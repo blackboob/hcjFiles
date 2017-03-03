@@ -1,0 +1,106 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 5</title>
+    <style>
+    	 #ul li{
+			display:inline-block;
+			height:30px;
+			width:15px; 
+			border:1px solid #900;
+			background:red;
+			color:white;			 	
+			list-style:none;			 
+			margin-top:10px; 
+			margin-left:5px; 			 		
+			}
+		ul{
+		margin-top:20px;	
+		margin-left:0px;	
+		 
+			}	 
+    </style>
+  </head>
+<body>
+  
+
+ <input id="input" value="请输入10-100的数字">
+<input type="button" value="左侧入">
+<input type="button" value="右侧入">
+<input type="button" value="左侧出">
+<input type="button" value="右侧出"> 
+<input type="button" value="排序">
+<ul id="ul">
+	  
+</ul>  
+ 
+<script type="text/javascript">
+ 
+	//获取元素	  
+	var aInput=document.getElementsByTagName("input");
+	var oIn=aInput[0];
+	var oUl=document.getElementById("ul");
+	oUl.innerHTML=""; 
+	  
+	/*创建li*/
+	 function creatLi(val){		  
+	 	var oLi = document.createElement("li");		  
+		if(oIn.value >=10 && oIn.value <= 100){
+			if(oUl.getElementsByTagName("li").length == 60){
+				alert("元素数量超过上限！");
+			}else if(oUl.getElementsByTagName("li").length== 0 || val == "right"){					   
+				oUl.appendChild(oLi);
+			 } else{					   
+				oUl.insertBefore(oLi,oUl.firstChild);
+			   }	
+			}
+		oLi.style.height=oIn.value+"px";	
+		oIn.value=" ";		      	  		  
+		}
+		 	
+	aInput[1].onclick=function(){		 
+		creatLi();
+		}; 
+	aInput[2].onclick=function(){
+		creatLi("right");
+		}	
+	aInput[3].onclick=function(){
+		alert(oUl.firstChild.innerHTML);
+		oUl.removeChild(oUl.firstChild);		 
+		}
+	aInput[4].onclick=function(){
+		alert(oUl.lastChild.innerHTML);
+		oUl.removeChild(oUl.lastChild);		 
+		}
+		
+	//冒泡排序	
+	aInput[5].onclick=function(){
+		var aLi=oUl.getElementsByTagName("li");
+		var oH1,oH2;
+		for(var i=0,len=aLi.length;i<len;i++){
+			for(var j=i+1;j<len;j++){
+				if(aLi[i].offsetHeight < aLi[j].offsetHeight){					 
+					oH1=aLi[i].offsetHeight;
+					oH2=aLi[j].offsetHeight;
+					aLi[i].style.height=oH2+"px";
+					aLi[j].style.height=oH1+"px";
+					}
+				}			
+			}
+		}
+		    
+   //事件代理  
+   
+   var aLi= oUl.getElementsByTagName("li"); 
+   oUl.onclick=function(event){
+	   var oEvent=window.event || event;
+	   var oTarget=oEvent.target || oEvent.srcElement;
+	   if(oTarget.tagName.toLowerCase() == "li" ){
+		   oUl.removeChild(oTarget);
+		   }
+	   }
+
+</script>
+</body>
+</html>
