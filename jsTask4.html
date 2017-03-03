@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 4</title>
+    <style>
+    	 #ul li{
+			display:inline-block;
+			height:30px;
+			padding:0 10px 0 10px;
+			border:1px solid #900;
+			background:red;
+			color:white;
+			font-weight:bolder;			
+			list-style:none;
+			text-aling:center;
+			line-height:30px;
+			margin-left:10px;
+			margin-top:10px;		
+			}
+		ul{
+		margin-left:0px;	
+		padding:0px;
+			}	 
+    </style>
+  </head>
+<body>
+  
+
+<input id="input">
+<input type="button" value="左侧入">
+<input type="button" value="右侧入">
+<input type="button" value="左侧出">
+<input type="button" value="右侧出"> 
+<ul id="ul">
+	  
+</ul>  
+ 
+<script type="text/javascript">
+ 
+	  //获取元素	  
+	var aInput=document.getElementsByTagName("input");
+	var oIn=aInput[0];
+	var oUl=document.getElementById("ul");
+	 
+	  
+	/*创建li*/
+	 function creatLi(val){		  
+	 	var oLi = document.createElement("li");
+		var text= document.createTextNode(oIn.value);
+		oLi.appendChild(text);   
+			     if(oUl.childNodes.length == 1 || val == "right"){					   
+					  oUl.appendChild(oLi);
+				  } else{					   
+					  oUl.insertBefore(oLi,oUl.firstChild);
+				  }		  		  
+			  }
+		 	
+	aInput[1].onclick=function(){		 
+		creatLi();
+		}; 
+	aInput[2].onclick=function(){
+		creatLi("right");
+		}	
+	aInput[3].onclick=function(){
+		alert(oUl.firstChild.innerHTML);
+		oUl.removeChild(oUl.firstChild);
+		 
+		}
+	aInput[4].onclick=function(){
+		alert(oUl.lastChild.innerHTML);
+		oUl.removeChild(oUl.lastChild);
+		 
+		}	
+    
+   //事件代理
+   
+   
+   var aLi= oUl.getElementsByTagName("li"); 
+   oUl.onclick=function(event){
+	   var oEvent=window.event || event;
+	   var oTarget=oEvent.target || oEvent.srcElement;
+	   if(oTarget.tagName.toLowerCase() == "li" ){
+		   oUl.removeChild(oTarget);
+		   }
+	   }
+
+</script>
+</body>
+</html>
