@@ -1,0 +1,107 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 6</title>
+    <style>
+    	 #ul li{
+			display:inline-block;
+			height:30px;
+			padding:0 10px 0 10px;
+			border:1px solid #900;
+			background:red;
+			color:white;
+			font-weight:bolder;			
+			list-style:none;
+			text-aling:center;
+			line-height:30px;
+			margin-left:10px;
+			margin-top:10px;		
+			}
+		 ul{
+			margin-left:0px;	
+			padding:0px;
+			}	 
+    </style>
+  </head>
+<body>
+<textarea id="input"></textarea>
+<input type="button" value="左侧入">
+<input type="button" value="右侧入">
+<input type="button" value="左侧出">
+<input type="button" value="右侧出"> 
+
+<input type="text">
+<input type="button" value="查询">
+<ul id="ul">
+	  
+</ul>  
+ 
+<script type="text/javascript">
+ 
+	  //获取元素	  
+	var aInput=document.getElementsByTagName("input");
+	var oIn=document.getElementById("input");
+	var oUl=document.getElementById("ul");	 
+	  
+	/*创建li*/
+	 function creatLi(val){	
+	 	var arr=[];
+		arr=oIn.value.split(/[,\r、，，\s]/);	  
+	 	for(var i=0,len=arr.length;i<len;i++){
+	 		var oLi = document.createElement("li"); 
+			var text= document.createTextNode(arr[i]);
+			oLi.appendChild(text);   
+			if(oUl.childNodes.length == 1 || val == "right"){	  oUl.appendChild(oLi);
+			} else{					   
+				  oUl.insertBefore(oLi,oUl.firstChild);
+			    }	
+	 	}	  		  
+	}
+		 	
+	aInput[0].onclick=function(){		 
+		creatLi();
+		}; 
+	aInput[1].onclick=function(){
+		creatLi("right");
+		}	
+	aInput[2].onclick=function(){
+		alert(oUl.firstChild.innerHTML);
+		oUl.removeChild(oUl.firstChild);		 
+		}
+	aInput[3].onclick=function(){
+		alert(oUl.lastChild.innerHTML);
+		oUl.removeChild(oUl.lastChild);		 
+		}	
+    
+   //事件代理
+   
+   
+   var aLi= oUl.getElementsByTagName("li"); 
+   oUl.onclick=function(event){
+	   var oEvent=window.event || event;
+	   var oTarget=oEvent.target || oEvent.srcElement;
+	   if(oTarget.tagName.toLowerCase() == "li" ){
+		   oUl.removeChild(oTarget);
+	    }
+	 }
+
+	/*查询*/
+	function findOut(){
+		var aLi2= oUl.getElementsByTagName("li"); 
+		var target=aInput[4].value;		 
+		for(var i=0,len=aLi2.length;i<len;i++){
+			if(aLi2[i].firstChild.nodeValue.indexOf(target) !== -1){
+			aLi2[i].style.background="green";	
+			}else{
+			aLi2[i].style.background="red";
+			}
+		}	 
+	}
+
+	aInput[5].onclick=function(){		 
+		findOut();
+	};	 
+</script>
+</body>
+</html>
